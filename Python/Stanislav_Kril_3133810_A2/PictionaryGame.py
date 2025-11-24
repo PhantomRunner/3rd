@@ -21,7 +21,7 @@ class PictionaryGame(QMainWindow):  # documentation https://doc.qt.io/qt-6/qwidg
         self.setGeometry(400, 400, 800, 600)
 
         # image settings (default)
-        self.image = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
+        self.image = QPixmap("./Assets/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.image.fill(Qt.GlobalColor.white)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill
         mainWidget = QWidget()
         mainWidget.setMaximumWidth(300)
@@ -65,25 +65,25 @@ class PictionaryGame(QMainWindow):  # documentation https://doc.qt.io/qt-6/qwidg
             Set a hot key for fast call
         '''
         #  save action
-        saveAction = QAction(QIcon("./icons/save.png"), "Save",self)  # create a save action with a png as an icon, documentation: https://doc.qt.io/qt-6/qaction.html
+        saveAction = QAction(QIcon("./Assets/save.png"), "Save",self)  # create a save action with a png as an icon, documentation: https://doc.qt.io/qt-6/qaction.html
         saveAction.setShortcut("Ctrl+S")  # connect this save action to a keyboard shortcut, documentation: https://doc.qt.io/qt-6/qaction.html#shortcut-prop
         fileMenu.addAction(saveAction)  # add the save action to the file menu, documentation: https://doc.qt.io/qt-6/qwidget.html#addAction
         saveAction.triggered.connect(self.save)  # when the menu option is selected or the shortcut is used the save slot is triggered, documentation: https://doc.qt.io/qt-6/qaction.html#triggered
 
         #  open action
-        openAction = QAction(QIcon("./icons/open.png"), "Open", self)
+        openAction = QAction(QIcon("./Assets/open.png"), "Open", self)
         openAction.setShortcut("Ctrl+O")
         openAction.triggered.connect(self.open)
         fileMenu.addAction(openAction)
 
         #  clear action
-        clearAction = QAction(QIcon("./icons/clear.png"), "Clear", self)
+        clearAction = QAction(QIcon("./Assets/clear.png"), "Clear", self)
         clearAction.setShortcut("Ctrl+C")
         fileMenu.addAction(clearAction)
         clearAction.triggered.connect(self.clear)
 
         #  exit action
-        exitAction = QAction(QIcon("./icons/exit.png"), "Exit", self)
+        exitAction = QAction(QIcon("./Assets/exit.png"), "Exit", self)
         exitAction.setShortcut("Ctrl+Q")
         exitAction.triggered.connect(self.exitApp)
         fileMenu.addAction(exitAction)
@@ -108,7 +108,7 @@ class PictionaryGame(QMainWindow):  # documentation https://doc.qt.io/qt-6/qwidg
             call a event-driven function
         '''
         #  about action
-        aboutAction = QAction(QIcon("./icons/about.png"), "About", self)
+        aboutAction = QAction(QIcon("./Assets/about.png"), "About", self)
         aboutAction.setShortcut("F1")
         aboutAction.triggered.connect(self.showAbout)
         helpMenu.addAction(aboutAction)
@@ -121,22 +121,22 @@ class PictionaryGame(QMainWindow):  # documentation https://doc.qt.io/qt-6/qwidg
             Call a event-driven function
         '''
         # brush thickness
-        threepxAction = QAction(QIcon("./icons/threepx.png"), "3px", self)
+        threepxAction = QAction(QIcon("./Assets/threepx.png"), "3px", self)
         threepxAction.setShortcut("Ctrl+3")
         brushSizeMenu.addAction(threepxAction)  # connect the action to the function below
         threepxAction.triggered.connect(self.threepx)
 
-        fivepxAction = QAction(QIcon("./icons/fivepx.png"), "5px", self)
+        fivepxAction = QAction(QIcon("./Assets/fivepx.png"), "5px", self)
         fivepxAction.setShortcut("Ctrl+5")
         brushSizeMenu.addAction(fivepxAction)
         fivepxAction.triggered.connect(self.fivepx)
 
-        sevenpxAction = QAction(QIcon("./icons/sevenpx.png"), "7px", self)
+        sevenpxAction = QAction(QIcon("./Assets/sevenpx.png"), "7px", self)
         sevenpxAction.setShortcut("Ctrl+7")
         brushSizeMenu.addAction(sevenpxAction)
         sevenpxAction.triggered.connect(self.sevenpx)
 
-        ninepxAction = QAction(QIcon("./icons/ninepx.png"), "9px", self)
+        ninepxAction = QAction(QIcon("./Assets/ninepx.png"), "9px", self)
         ninepxAction.setShortcut("Ctrl+9")
         brushSizeMenu.addAction(ninepxAction)
         ninepxAction.triggered.connect(self.ninepx)
@@ -149,22 +149,22 @@ class PictionaryGame(QMainWindow):  # documentation https://doc.qt.io/qt-6/qwidg
             call a event-driven function
         """
         # brush colors
-        blackAction = QAction(QIcon("./icons/black.png"), "Black", self)
+        blackAction = QAction(QIcon("./Assets/black.png"), "Black", self)
         blackAction.setShortcut("Ctrl+B")
         brushColorMenu.addAction(blackAction)
         blackAction.triggered.connect(self.black)
 
-        redAction = QAction(QIcon("./icons/red.png"), "Red", self)
+        redAction = QAction(QIcon("./Assets/red.png"), "Red", self)
         redAction.setShortcut("Ctrl+R")
         brushColorMenu.addAction(redAction)
         redAction.triggered.connect(self.red)
 
-        greenAction = QAction(QIcon("./icons/green.png"), "Green", self)
+        greenAction = QAction(QIcon("./Assets/green.png"), "Green", self)
         greenAction.setShortcut("Ctrl+G")
         brushColorMenu.addAction(greenAction)
         greenAction.triggered.connect(self.green)
 
-        yellowAction = QAction(QIcon("./icons/yellow.png"), "Yellow", self)
+        yellowAction = QAction(QIcon("./Assets/yellow.png"), "Yellow", self)
         yellowAction.setShortcut("Ctrl+Y")
         brushColorMenu.addAction(yellowAction)
         yellowAction.triggered.connect(self.yellow)
