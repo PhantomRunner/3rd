@@ -2,43 +2,43 @@ import java.io.*;
 
 final public class Person {
     private String firstName;
-    private String secondName;
+    private String lastName;
     private int age;
 
-    public Person(String fn, String sn, int a) {
-        firstName = fn;
-        secondName = sn;
-        age = a;
+    public Person(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
 
     public Person() {
         firstName = null;
-        secondName = null;
+        lastName = null;
         age = 0;
     }
 
-    public String fName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public String sName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public int age() {
+    public int getAge() {
         return age;
     }
 
     public String toString() {
-        return secondName + " " + firstName + " " + age;
+        return lastName + " " + firstName + " " + age;
     }
 
-    public boolean equals(Object ob) { //equality based on surname only
-        if (!(ob instanceof Person)) {
+    public boolean equals(Object object) { //equality based on surname only
+        if (!(object instanceof Person)) {
             return false;
         }
-        Person p = (Person) ob;
-        return secondName.equals(p.secondName);
+        Person person = (Person) object;
+        return lastName.equals(person.lastName);
     }
 
     //======================================================
@@ -46,7 +46,7 @@ final public class Person {
     public void writeOutputStream(DataOutputStream out) {
         try {
             out.writeUTF(firstName);
-            out.writeUTF(secondName);
+            out.writeUTF(lastName);
             out.writeInt(age);
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ final public class Person {
     public void readInputStream(DataInputStream in) {
         try {
             firstName = in.readUTF();
-            secondName = in.readUTF();
+            lastName = in.readUTF();
             age = in.readInt();
         } catch (IOException e) {
             e.printStackTrace();

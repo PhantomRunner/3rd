@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
+
 
 public class PersonUploadClient {
     final static int portPerson = 1235;
@@ -13,7 +13,7 @@ public class PersonUploadClient {
         write(new Person("Lucia", "Joyce", 10));
     }
 
-    static void write(Person p) {
+    static void write(Person personObject) {
         try {
             Socket socket;
 
@@ -24,7 +24,8 @@ public class PersonUploadClient {
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             out.writeInt(0); //send upload option
-            p.writeOutputStream(out);
+
+            personObject.writeOutputStream(out);
 
             boolean ok = in.readBoolean();
 

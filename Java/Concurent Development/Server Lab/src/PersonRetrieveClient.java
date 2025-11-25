@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
+
 
 public class PersonRetrieveClient {
     final static int portPerson = 1235;
@@ -19,16 +19,18 @@ public class PersonRetrieveClient {
             out.writeInt(1); // send download option
             out.writeUTF("Joyce");
 
-            int k = in.readInt(); //retrieve number of matches
+            int matches = in.readInt(); //retrieve number of matches
 
-            if (k == 0) {
+            if (matches == 0) {
                 System.out.println("No matches found");
             } else {
-                Person p = new Person();
-                for (int j = 0; j < k; j++) {
-                    p.readInputStream(in);
-                    System.out.println(p);
+                Person person = new Person();
+
+                for (int j = 0; j < matches; j++) {
+                    person.readInputStream(in);
+                    System.out.println(person);
                 }
+
                 socket.close();
             }
         } catch (IOException e) {

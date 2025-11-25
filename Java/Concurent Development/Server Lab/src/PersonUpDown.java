@@ -8,9 +8,9 @@ class PersonUpDown extends Thread {
     Socket socket;
     Data data;
 
-    PersonUpDown(Socket s, Data d) {
-        socket = s;
-        data = d;
+    PersonUpDown(Socket socket, Data data) {
+        this.socket = socket;
+        this.data = data;
     }
 
     public void run() {
@@ -18,25 +18,30 @@ class PersonUpDown extends Thread {
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-            int opt = in.readInt();
+            int option = in.readInt();
 
-            if (opt == 0) { //upload
+            if (option == 0) { //upload
 
-                Person p = new Person();
-                p.readInputStream(in);
-                data.add(p);
+                Person matches = new Person();
+
+                matches.readInputStream(in);
+                data.add(matches);
+
                 out.writeBoolean(true);
+
                 socket.close();
 
             } else { //download
 
-                String sname = in.readUTF();
-                ArrayList<Person> lst = data.retrieve(sname);
-                out.writeInt(lst.size());
+                String lastName = in.readUTF();
 
-                for (int j = 0; j < lst.size(); j++) {
-                    Person p = lst.get(j);
-                    p.writeOutputStream(out);
+                ArrayList<Person> personList = data.retrieve(lastName);
+
+                out.writeInt(personList.size());
+
+                for (int j = 0; j < personList.size(); j++) {
+                    Person person = personList.get(j);
+                    person.writeOutputStream(out);
                 }
                 socket.close();
             }
