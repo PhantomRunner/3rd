@@ -25,6 +25,7 @@ class Data {
         }
     }
 
+    // Method to download the data set based on specific person last name
     ArrayList<Person> retrieve(String lastName) {
         lock.lock();
 
@@ -38,6 +39,65 @@ class Data {
 
                 if (person1.equals(p)) {
                     dataSet.add(person1);
+                }
+            }
+            return dataSet;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    // Method to download entire data set
+    ArrayList<Person> retrieve() {
+        lock.lock();
+
+        try {
+            ArrayList<Person> dataSet = new ArrayList<Person>();
+
+            dataSet.addAll(data);
+
+            return dataSet;
+
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    Person retrieveOldest() {
+        lock.lock();
+        try {
+            int maxAge = Integer.MIN_VALUE;
+            Person oldestPerson = null;
+
+            for (Person person : data) {
+
+                int currentAge = person.getAge();
+
+                if (currentAge > maxAge) {
+                    maxAge = currentAge;
+                    oldestPerson = person;
+
+                }
+            }
+
+            return oldestPerson;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    // Method to download date set with person in specific range of people
+    ArrayList<Person> retrieve(int min, int max) {
+        lock.lock();
+
+        try {
+            ArrayList<Person> dataSet = new ArrayList<Person>();
+
+            for (int j = 0; j < data.size(); j++) {
+                Person currentPerson = data.get(j);
+
+                if (currentPerson.getAge() >= min && currentPerson.getAge() <= max) {
+                    dataSet.add(currentPerson);
                 }
             }
             return dataSet;

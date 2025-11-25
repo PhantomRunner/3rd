@@ -31,7 +31,7 @@ class PersonUpDown extends Thread {
 
                 socket.close();
 
-            } else { //download
+            } else if (option == 1) { //download by last name
 
                 String lastName = in.readUTF();
 
@@ -44,8 +44,48 @@ class PersonUpDown extends Thread {
                     person.writeOutputStream(out);
                 }
                 socket.close();
+
+            } else if (option == 2) { // download all data from the data set
+
+                ArrayList<Person> personList = data.retrieve();
+                out.writeInt(personList.size());
+
+                for (int j = 0; j < personList.size(); j++) {
+                    Person person = personList.get(j);
+                    person.writeOutputStream(out);
+                }
+
+                socket.close();
+
+            } else if (option == 3) { // download only oldest person in the data set
+
+               Person person = data.retrieveOldest();
+
+               if (person == null) {
+                   out.writeInt(0);
+               }else {
+                   out.writeInt(1);
+                   person.writeOutputStream(out);
+               }
+
+                socket.close();
+
+            } else if (option == 4) { // download data set of people in given age gap
+                int minimumRequiredAge = in.readInt();
+                int maximumRequiredAge = in.readInt();
+                ArrayList<Person> personList = data.retrieve(minimumRequiredAge,maximumRequiredAge);
+
+                out.writeInt(personList.size());
+
+                for (int j = 0; j < personList.size(); j++) {
+                    Person person = personList.get(j);
+                    person.writeOutputStream(out);
+                }
+
+                socket.close();
             }
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
