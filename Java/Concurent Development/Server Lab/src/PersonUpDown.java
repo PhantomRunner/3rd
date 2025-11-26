@@ -84,6 +84,9 @@ class PersonUpDown extends Thread {
 
                 socket.close();
             }
+
+            System.out.println("Received option " + option + " from client " + socket.getInetAddress());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
