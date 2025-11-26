@@ -31,6 +31,8 @@ public class PersonUploadClient {
 
             if (!ok) {
                 System.out.println("Error");
+            }else{
+                System.out.println("Uploaded: " + personObject);
             }
             socket.close();
         } catch (IOException e) {
