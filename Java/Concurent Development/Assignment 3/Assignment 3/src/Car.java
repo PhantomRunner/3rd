@@ -4,26 +4,28 @@ import java.io.IOException;
 
 // Class to represent the Car object
 public class Car {
+
     // Fields of each Car instance
     private String registration;
     private String make;
-    private int price;
-    private int mileAge;
+    private double price;
+    private int mileage;
     private boolean forSale;
 
     // Constructors
-    public Car(String registration, String make, int price, int mileAge, boolean forSale) {
+    public Car(String registration, String make, double price, int mileAge, boolean forSale) {
         this.registration = registration;
         this.make = make;
         this.price = price;
-        this.mileAge = mileAge;
+        this.mileage = mileAge;
         this.forSale = forSale;
     }
+
     public Car() {
         this.registration = "";
         this.make = "";
         this.price = 0;
-        this.mileAge = 0;
+        this.mileage = 0;
         this.forSale = false;
     }
 
@@ -31,25 +33,25 @@ public class Car {
     public String getRegistration() {
         return registration;
     }
-    public boolean isForSale() {
+    public boolean forSale() {
         return forSale;
     }
     public String getMake() {
         return make;
     }
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
-    public int getMileAge() {
-        return mileAge;
+    public int getMileage() {
+        return mileage;
     }
 
     // Setters
     public void setPrice(int price) {
         this.price = price;
     }
-    public void setMileAge(int mileAge) {
-        this.mileAge = mileAge;
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
     }
     public void setMake(String make) {
         this.make = make;
@@ -62,17 +64,17 @@ public class Car {
     }
 
     public String toString() {
-        return "Registration: " + registration + " Make: " + make + " Price: " + price + " Mileage: " + mileAge;
+        return make + " - " + price + " - Mileage - " + mileage + " - Registration - " + registration.toUpperCase() + " - For sale: " + forSale;
     }
 
     public void writeOutputStream(DataOutputStream out) {
-        try{
+        try {
             out.writeUTF(registration);
             out.writeUTF(make);
-            out.writeInt(price);
-            out.writeInt(mileAge);
+            out.writeDouble(price);
+            out.writeInt(mileage);
             out.writeBoolean(forSale);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -82,7 +84,7 @@ public class Car {
             registration = in.readUTF();
             make = in.readUTF();
             price = in.readInt();
-            mileAge = in.readInt();
+            mileage = in.readInt();
             forSale = in.readBoolean();
         } catch (IOException e) {
             e.printStackTrace();
