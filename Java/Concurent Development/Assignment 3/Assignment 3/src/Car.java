@@ -1,9 +1,7 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.Serializable;
 
 // Class to represent the Car object
-public class Car {
+public class Car implements Serializable {
 
     // Fields of each Car instance
     private String registration;
@@ -65,29 +63,5 @@ public class Car {
 
     public String toString() {
         return make + " - " + price + " - Mileage - " + mileage + " - Registration - " + registration.toUpperCase() + " - For sale: " + forSale;
-    }
-
-    public void writeOutputStream(DataOutputStream out) {
-        try {
-            out.writeUTF(registration);
-            out.writeUTF(make);
-            out.writeDouble(price);
-            out.writeInt(mileage);
-            out.writeBoolean(forSale);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readInputStream(DataInputStream in) {
-        try {
-            registration = in.readUTF();
-            make = in.readUTF();
-            price = in.readInt();
-            mileage = in.readInt();
-            forSale = in.readBoolean();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
