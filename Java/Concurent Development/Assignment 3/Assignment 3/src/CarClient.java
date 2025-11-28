@@ -4,9 +4,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+// Client that connects to server and performs car operations
 public class CarClient {
 
-    final static int PORT = 1234;
+    final static int PORT = 1234; // Server port
 
     public static void main(String[] args) {
 
@@ -45,6 +46,7 @@ public class CarClient {
                 out.writeObject(addReq);
                 out.flush();
 
+                // Read and display server response
                 Response response = (Response) in.readObject();
                 System.out.println(response.getFeedback());
             }
@@ -94,7 +96,7 @@ public class CarClient {
             System.out.println("Total value of sold cars: " + totalValue);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Print any errors
         }
     }
 }
