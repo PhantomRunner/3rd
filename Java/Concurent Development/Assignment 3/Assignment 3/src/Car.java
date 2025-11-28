@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
-// Class to represent the Car object
+//Represents a car stored on server.
+// Implements Serializable so objects can be sent over a network
 public class Car implements Serializable {
 
     // Fields of each Car instance
@@ -10,7 +11,7 @@ public class Car implements Serializable {
     private int mileage;
     private boolean forSale;
 
-    // Constructors
+    // Full constructor used when creating a new Car object with all attributes.
     public Car(String registration, String make, double price, int mileAge, boolean forSale) {
         this.registration = registration;
         this.make = make;
@@ -19,6 +20,7 @@ public class Car implements Serializable {
         this.forSale = forSale;
     }
 
+    // Empty constructor used for default initialization.
     public Car() {
         this.registration = "";
         this.make = "";
@@ -61,6 +63,7 @@ public class Car implements Serializable {
         this.forSale = forSale;
     }
 
+    // Return string version of object with full data
     public String toString() {
         return make + " - " + price + " - Mileage - " + mileage + " - Registration - " + registration.toUpperCase() + " - For sale: " + forSale;
     }
