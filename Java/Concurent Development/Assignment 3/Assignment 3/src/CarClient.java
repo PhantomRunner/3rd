@@ -1,4 +1,3 @@
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -12,12 +11,14 @@ public class CarClient {
     public static void main(String[] args) {
 
         try {
+            // Connect to server
             Socket socket = new Socket(InetAddress.getLocalHost(), PORT);
 
+            // Streams for sending requests and receiving responses
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            // Add cars to the database
+            // List of cars to add to the server database
             Car[] cars = {
                     new Car("ABC123", "Ferrari", 100000, 5000, true),
                     new Car("DEF456", "Ford Fiesta", 15000, 20000, true),
@@ -36,9 +37,11 @@ public class CarClient {
                     new Car("QRS345", "Range Rover", 15000, 28000, false)
             };
 
+            // Send each car to the server
             for (Car car : cars) {
                 AddCarRequest addReq = new AddCarRequest(car);
                 System.out.println("[Client] Sending request: " + addReq.getClass().getSimpleName());
+
                 out.writeObject(addReq);
                 out.flush();
 
@@ -46,28 +49,29 @@ public class CarClient {
                 System.out.println(response.getFeedback());
             }
 
-            // List cars for sale
+            // Request list of cars that are for sale
             ListCarsForSaleRequest listForSale = new ListCarsForSaleRequest();
-
             out.writeObject(listForSale);
             out.flush();
 
             Response responseForSale = (Response) in.readObject();
+
             System.out.println("\nCars for sale:");
             ArrayList<Car> saleList = (ArrayList<Car>) responseForSale.getData();
+
             for (Car car : saleList) {
                 System.out.println(car);
             }
 
-            //  Sell a car
-            SellCarRequest sellReq = new SellCarRequest("DEF456"); // sell Ford Fiesta
+            // Sell a car (Ford Fiesta)
+            SellCarRequest sellReq = new SellCarRequest("DEF456");
             out.writeObject(sellReq);
             out.flush();
 
             Response sellResponse = (Response) in.readObject();
             System.out.println("\n" + sellResponse.getFeedback());
 
-            // 4List cars of a specific make
+            // Request list of all Ford cars
             ListCarsByMakeRequest listByMakeReq = new ListCarsByMakeRequest("Ford");
             out.writeObject(listByMakeReq);
             out.flush();
@@ -75,10 +79,12 @@ public class CarClient {
             Response listByMakeResp = (Response) in.readObject();
             System.out.println("\nFord cars in database:");
             ArrayList<Car> fordCars = (ArrayList<Car>) listByMakeResp.getData();
+
             for (Car car : fordCars) {
                 System.out.println(car);
             }
 
+            // Request total value of sold cars
             TotalSellValueRequest req = new TotalSellValueRequest();
             out.writeObject(req);
             out.flush();
@@ -87,11 +93,8 @@ public class CarClient {
             double totalValue = (Double) totalResp.getData();
             System.out.println("Total value of sold cars: " + totalValue);
 
-
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
